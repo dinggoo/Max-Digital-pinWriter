@@ -3,14 +3,14 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 8,
-			"minor" : 3,
-			"revision" : 3,
+			"minor" : 5,
+			"revision" : 0,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
 ,
 		"classnamespace" : "box",
-		"rect" : [ 147.0, 285.0, 1126.0, 705.0 ],
+		"rect" : [ 118.0, 320.0, 1138.0, 498.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -39,6 +39,18 @@
 		"subpatcher_template" : "Untitled_template",
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
+				"box" : 				{
+					"id" : "obj-3",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 357.0, 201.0, 94.0, 22.0 ],
+					"text" : "usbmodem1101"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontface" : 1,
 					"fontsize" : 36.0,
@@ -81,7 +93,6 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 548.0, 56.0, 622.0, 409.0 ],
-					"presentation_linecount" : 30,
 					"text" : "/*\nDigital Pin Control:  Writen by Mark Meeuwneoord 2022\n*/\n\nconst int offSet = 2; // start at pinNo\nconst int maxPins = 54; // change to your needs and boardtype\n\nvoid setup()\n{\n  Serial.begin(9600);\n\n  for (int i = offSet; i <= maxPins ; i++) {\n    pinMode(i, OUTPUT);\n  }\n}\n\nvoid loop()\n{\n  while (Serial.available() > 0) {\n    int pinNo = Serial.parseInt();  // look for the next valid integer in serialstream: This is your pin nummber.\n    int pinValue = Serial.parseInt(); // do it again: This is the pin state (high / low)\n\n  if (Serial.read() == '\\n') {\n     if (pinNo >= offSet && pinNo <= maxPins)\n      {\n        digitalWrite (pinNo, pinValue);\n        }\n    }\n  }\n}"
 				}
 
@@ -135,7 +146,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 222.5, 147.0, 50.0, 22.0 ],
-					"text" : "1 0"
+					"text" : "7 1"
 				}
 
 			}
@@ -155,8 +166,8 @@
 				"box" : 				{
 					"id" : "obj-14",
 					"maxclass" : "number",
-					"maximum" : 37,
-					"minimum" : 1,
+					"maximum" : 54,
+					"minimum" : 0,
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "bang" ],
@@ -180,13 +191,12 @@
 , 			{
 				"box" : 				{
 					"id" : "obj-13",
-					"linecount" : 3,
 					"maxclass" : "message",
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 247.0, 314.0, 104.0, 49.0 ],
-					"text" : "port Bluetooth-Incoming-Port"
+					"patching_rect" : [ 247.0, 314.0, 104.0, 22.0 ],
+					"text" : "write 4"
 				}
 
 			}
@@ -201,8 +211,8 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 8,
-							"minor" : 3,
-							"revision" : 3,
+							"minor" : 5,
+							"revision" : 0,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -347,6 +357,18 @@
 				}
 
 			}
+, 			{
+				"box" : 				{
+					"id" : "obj-5",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 298.0, 247.0, 50.0, 22.0 ],
+					"text" : "port $1"
+				}
+
+			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
@@ -385,6 +407,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-5", 0 ],
+					"source" : [ "obj-3", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
 					"source" : [ "obj-4", 1 ]
 				}
@@ -394,6 +423,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-16", 0 ],
 					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"source" : [ "obj-5", 0 ]
 				}
 
 			}
@@ -414,19 +450,6 @@
 
 			}
  ],
-		"parameters" : 		{
-			"parameterbanks" : 			{
-				"0" : 				{
-					"index" : 0,
-					"name" : "",
-					"parameters" : [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-				}
-
-			}
-,
-			"inherited_shortname" : 1
-		}
-,
 		"dependency_cache" : [  ],
 		"autosave" : 0
 	}
